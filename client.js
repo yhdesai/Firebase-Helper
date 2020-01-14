@@ -27,6 +27,8 @@
 */
 
 
+/* Firebase Authentication */
+
 signUp(email, password);
 
 signIn(email, password);
@@ -48,3 +50,30 @@ function userIsSignedIn(user) {
 function userIsSignedOut() {
   // TODO: Enter code here that needs to be run when the user is signed out
 }
+
+
+/* Firebase Database */
+
+// Read Data
+var data = readDataFromDB(db.collection("cities").doc("LA"))
+
+// Write Data
+writeDataToDB('post/helloworld', {
+  firstname: "Hello",
+  lastname: "World"
+})
+
+
+/* Firebase Firestore */
+
+var firestore = firebase.firestore();
+
+
+// Read Data
+var data = readDatafromFirestore(firestore.collection("cities").doc("LA"))
+
+// Write Data
+writeDataToFirestore(firestore.collection("posts").doc("one"), {
+  firstname: "Hello",
+  lastname: "World"
+})

@@ -39,16 +39,42 @@ firebase.auth().onAuthStateChanged(function(user) {
 
 /* Firebase Database*/
 
-var database = firebase.database();
-
-// Read to Firebase Database
-function readData(dbRef) {
+// Read from Firebase Database
+function readDataFromDB(dbRef) {
   firebase.database().ref(dbRef).once('value').then(function(snapshot) {
     return snapshot.val()
   });
 }
 
 // Write to Firebase Database
-function writeData(dbRef, jsonObject) {
+function writeDataToDB(dbRef, jsonObject) {
   firebase.database().ref(dbRef).set(jsonObject);
+}
+
+
+/* Firebase Firestore */
+
+// Read from Firebase Firstore
+function readDatafromFirestore(docRef) {
+  docRef.get().then(function(doc) {
+    if (doc.exists) {
+      return doc.data();
+    } else {
+      // doc.data() will be undefined in this case
+      console.log("No such document!");
+    }
+  }).catch(function(error) {
+    console.log("Error getting document:", error);
+  });
+}
+
+// Add to Firebase Firstore
+function writeDataToFirestore(dbRef, data) {
+  dbRef.set(data)
+    .then(function() {
+      console.log("Document successfully written!");
+    })
+    .catch(function(error) {
+      console.error("Error writing document: ", error);
+    });
 }
