@@ -10,7 +10,7 @@ function signUp(email, password) {
     // Handle Errors here.
     var errorCode = error.code;
     var errorMessage = error.message;
-    console.log(`Error occured in signing up \nError Code : ${errorCode}\nError Message : ${errorMessage}` );
+    console.log(`Error occured in signing up \nError Code : ${errorCode}\nError Message : ${errorMessage}`);
   });
 }
 
@@ -20,7 +20,7 @@ function signIn(email, password) {
     // Handle Errors here.
     var errorCode = error.code;
     var errorMessage = error.message;
-    // ...
+    console.log(`Error occured in signing in \nError Code : ${errorCode}\nError Message : ${errorMessage}`);
   });
   email - password.html
 }
@@ -30,7 +30,6 @@ firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     // User is signed in.
     userIsSignedIn(user);
-
   } else {
     // User is signed out.
     userIsSignedOut();
@@ -39,3 +38,17 @@ firebase.auth().onAuthStateChanged(function(user) {
 
 
 /* Firebase Database*/
+
+var database = firebase.database();
+
+// Read to Firebase Database
+function readData(dbRef) {
+  firebase.database().ref(dbRef).once('value').then(function(snapshot) {
+    return snapshot.val()
+  });
+}
+
+// Write to Firebase Database
+function writeData(dbRef, jsonObject) {
+  firebase.database().ref(dbRef).set(jsonObject);
+}
